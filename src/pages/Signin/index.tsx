@@ -27,6 +27,7 @@ export function Signin() {
   const handleLogin = async (data: any) => {
     await getAccount()
       .then((res: AxiosResponse) => {
+        localStorage.removeItem('USER_TOKEN')
         setUser(res.data)
         signin(data.email, data.password)
       })

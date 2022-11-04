@@ -1,28 +1,24 @@
-import * as Dialog from '@radix-ui/react-dialog'
-import { HeaderContainer, HeaderContent } from './styles'
+import { HeaderButtonSigout, HeaderContainer, HeaderContent } from './styles'
 
+import { SignOut } from 'phosphor-react'
+import { useContext } from 'react'
 import avatar from '../../assets/avatar.svg'
 import logo from '../../assets/logo-white.svg'
-import { HeaderButton } from '../../pages/Home/styles'
-import { BoxPerfl } from '../BoxPerfil'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export function Header() {
+  const { sigout } = useContext(AuthContext)
+
   return (
     <HeaderContainer>
       <HeaderContent>
         <img src={logo} alt="" />
-        <img src={avatar} alt="" />
 
-        {/* <Avatar /> */}
+        <HeaderButtonSigout onClick={sigout}>
+          <img src={avatar} alt="" />
+          <SignOut size={32} />
+        </HeaderButtonSigout>
       </HeaderContent>
-
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <HeaderButton>abrir perfil</HeaderButton>
-        </Dialog.Trigger>
-
-        <BoxPerfl />
-      </Dialog.Root>
     </HeaderContainer>
   )
 }

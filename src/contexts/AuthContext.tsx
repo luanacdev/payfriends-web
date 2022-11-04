@@ -7,6 +7,7 @@ interface AuthContextType {
   account: IAccount
   signin: (email: string, password: string) => string | undefined
   token: string
+  sigout: () => void
 }
 
 interface AuthContextProviderProps {
@@ -38,6 +39,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
+  const sigout = () => {
+    localStorage.removeItem('USER_TOKEN')
+    window.location.href = '/'
+  }
+
   // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState(() => {
     const token = localStorage.getItem('USER_TOKEN')
@@ -50,7 +56,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   })
 
   return (
-    <AuthContext.Provider value={{ user, setUser, account, signin, token }}>
+    <AuthContext.Provider
+      value={{ user, setUser, account, signin, token, sigout }}
+    >
       {children}
     </AuthContext.Provider>
   )
