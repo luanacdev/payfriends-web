@@ -1,13 +1,16 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { ThemeProvider } from 'styled-components'
 import { AuthContextProvider } from './contexts/AuthContext'
 import { RoutesApp } from './routes'
+import { GlobalStyle } from './styles/global'
+import { defaultTheme } from './styles/themes/default'
 
 export function App() {
   return (
-    <ChakraProvider>
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
       <AuthContextProvider>
         <RoutesApp />
       </AuthContextProvider>
-    </ChakraProvider>
+    </ThemeProvider>
   )
 }

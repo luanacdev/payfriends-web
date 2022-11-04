@@ -26,7 +26,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         const token = Math.random().toString(36).substring(2)
         localStorage.setItem('user_token', JSON.stringify({ email, token }))
         setAccount({ email, password })
-      } else {
+      }
+
+      if (hasUser[0].email === email || hasUser[0].password === password) {
         return 'E-mail ou senha incorretos'
       }
     } else {

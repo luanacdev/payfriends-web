@@ -1,18 +1,19 @@
 import { AxiosError, AxiosResponse } from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAccount } from '../../services/account.service'
+import * as S from './styles'
 
 export function Signin() {
   const { setUser, signin } = useContext(AuthContext)
 
+  const { register, handleSubmit } = useForm()
+
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState('')
+  const token = localStorage.getItem('user_token')
 
   useEffect(() => {
     getAccount()
@@ -24,35 +25,30 @@ export function Signin() {
       })
   }, [])
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      setError('Preencha todos os campos')
-      return
+  const handleLogin = (data: any) => {
+    signin(data.email, data.password)
+
+    console.log(signin(data.email, data.password))
+
+    if (typeof token === 'string') {
+      navigate('/home')
     }
-
-    const res = signin(email, password)
-
-    if (res) {
-      setError(res)
-      return
-    }
-
-    navigate('/home')
   }
 
   return (
     <>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Entrar</button>
+      <S.SigninContainer>
+        <S.SigninRightBox>
+          <S.SigninForm>
+            <form onSubmit={handleSubmit(handleLogin)}>
+              <input type="email" {...register('email')} />
+              <input type="password" {...register('password')} />
+              <button onClick={handleLogin}>Entrar</button>
+            </form>
+          </S.SigninForm>
+        </S.SigninRightBox>
+        <S.SigninImageBox></S.SigninImageBox>
+      </S.SigninContainer>
     </>
   )
 }
