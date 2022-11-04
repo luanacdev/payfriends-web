@@ -1,36 +1,5 @@
-import styled from 'styled-components'
-
 import * as Dialog from '@radix-ui/react-dialog'
-
-export const HeaderContainer = styled.header`
-  background: ${(props) => props.theme['blue-900']};
-  padding: 2.5rem 0 1.5rem;
-`
-
-export const HeaderContent = styled.div`
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
-export const Avatar = styled.div`
-  height: 50px;
-  border-radius: 4000px;
-  background: ${(props) => props.theme['green-500']};
-  color: ${(props) => props.theme.white};
-  font-weight: bold;
-  padding: 0 1.25rem;
-  border-radius: 6px;
-  cursor: pointer;
-  &:hover {
-    background: ${(props) => props.theme['green-700']};
-    transition: background-color 0.2s;
-  }
-`
+import styled from 'styled-components'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -46,9 +15,9 @@ export const Content = styled(Dialog.Content)`
   padding: 2.5rem 3rem;
   background: ${(props) => props.theme['gray-200']};
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0%;
+  left: 0;
+  height: 100%;
   form {
     margin-top: 2rem;
     display: flex;
@@ -90,5 +59,4 @@ export const CloseButton = styled(Dialog.Close)`
   right: 1.5rem;
   line-height: 0;
   cursor: pointer;
-  color: ${(props) => props.theme['gray-200']};
 `
