@@ -4,6 +4,7 @@ import {
   GridColDef,
   gridPageCountSelector,
   gridPageSelector,
+  GridRenderCellParams,
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,
@@ -13,24 +14,89 @@ import {
   // eslint-disable-next-line prettier/prettier
   useGridSelector
 } from '@mui/x-data-grid'
+import * as Dialog from '@radix-ui/react-dialog'
 import { AxiosError, AxiosResponse } from 'axios'
+import moment from 'moment'
+import { CheckCircle, Pencil, Trash, XCircle } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 import { ITasks } from '../../interfaces/ITasks'
 import { getTasks } from '../../services/tasks.service'
+import formatMonetaryValue from '../../utils/formatMonetaryValue'
+import { ModalEditPayment } from '../Modals/ModalEditPayment'
+import { ModalRemovePayment } from '../Modals/ModalRemovePayment'
+import { TableBoxButtons, TableButtonEdit } from './styles'
+
+function renderingPaymentStatus(params: GridRenderCellParams<boolean>) {
+  return params.value === true ? (
+    <CheckCircle size={25} color="green" />
+  ) : (
+    <XCircle size={25} color="red" />
+  )
+}
+
+function formatValue(params: GridRenderCellParams<number>) {
+  return formatMonetaryValue(params.value)
+}
+
+function formatValueDate(params: GridRenderCellParams<string>) {
+  return moment(params.value).format('LLL')
+}
+
+function editRow(params: GridRenderCellParams<number>) {
+  return (
+    <TableBoxButtons>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <TableButtonEdit>
+            <Pencil size={25} />
+          </TableButtonEdit>
+        </Dialog.Trigger>
+
+        <ModalEditPayment />
+      </Dialog.Root>
+
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <TableButtonEdit>
+            <Trash size={25} />
+          </TableButtonEdit>
+        </Dialog.Trigger>
+
+        <ModalRemovePayment />
+      </Dialog.Root>
+    </TableBoxButtons>
+  )
+}
 
 const columns: GridColDef[] = [
-  // { field: 'id', headerName: 'ID', width: 130 },
-  { field: 'name', headerName: 'Usuário', width: 130 },
-  { field: 'title', headerName: 'Título', width: 130 },
-  { field: 'date', headerName: 'Data', width: 130 },
-  { field: 'value', headerName: 'Valor', width: 130 },
+  { field: 'name', headerName: 'Usuário', width: 160 },
+  { field: 'title', headerName: 'Título', width: 250 },
+  {
+    field: 'date',
+    headerName: 'Data',
+    width: 250,
+    renderCell: formatValueDate,
+  },
+  {
+    field: 'value',
+    headerName: 'Valor',
+    width: 130,
+    renderCell: formatValue,
+  },
   {
     field: 'isPayed',
     headerName: 'Pago',
     width: 130,
+    renderCell: renderingPaymentStatus,
+    type: 'boolean',
   },
-
-  // { width: 1340, type: 'actions' },
+  {
+    field: 'id',
+    headerName: '',
+    width: 300,
+    renderCell: editRow,
+    type: 'number',
+  },
 ]
 
 function CustomPagination() {
@@ -87,7 +153,7 @@ export function Table() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
+        editMode="row"
         components={{
           Pagination: CustomPagination,
           Toolbar: CustomToolbar,
