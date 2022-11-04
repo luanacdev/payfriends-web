@@ -6,6 +6,7 @@ interface AuthContextType {
   setUser: (user: IUser[]) => void
   account: IAccount
   signin: (email: string, password: string) => string | undefined
+  token: string
 }
 
 interface AuthContextProviderProps {
@@ -24,8 +25,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     if (hasUser?.length) {
       if (hasUser[0].email === email && hasUser[0].password === password) {
         const token = Math.random().toString(36).substring(2)
-        localStorage.setItem('user_token', JSON.stringify({ email, token }))
+        localStorage.setItem('USER_TOKEN', JSON.stringify({ token }))
         setAccount({ email, password })
+        return (window.location.href = '/home')
       }
 
       if (hasUser[0].email === email || hasUser[0].password === password) {
@@ -36,8 +38,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useState(() => {
+    const token = localStorage.getItem('USER_TOKEN')
+
+    if (token) {
+      return token
+    }
+
+    return ''
+  })
+
   return (
-    <AuthContext.Provider value={{ user, setUser, account, signin }}>
+    <AuthContext.Provider value={{ user, setUser, account, signin, token }}>
       {children}
     </AuthContext.Provider>
   )
