@@ -4,12 +4,20 @@ import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAccount } from '../../services/account.service'
 import {
+  SigninBox,
+  SigninButton,
+  SigninButtonContainer,
   SigninContainer,
-  SigninForm,
   SigninImageBox,
+  SigninInput,
+  SigninInputContainer,
+  SigninLogoBox,
   // eslint-disable-next-line prettier/prettier
   SigninRightBox
 } from './styles'
+
+import logo from '../../assets/logo.svg'
+import men from '../../assets/men-on-cell-phone.svg'
 
 export function Signin() {
   const { setUser, signin } = useContext(AuthContext)
@@ -31,15 +39,34 @@ export function Signin() {
     <>
       <SigninContainer>
         <SigninRightBox>
-          <SigninForm>
+          <SigninBox>
+            <SigninLogoBox>
+              <img src={logo} alt="Logo" />
+            </SigninLogoBox>
+
+            <h1>Bem vindo de volta</h1>
             <form onSubmit={handleSubmit(handleLogin)}>
-              <input type="email" {...register('email')} />
-              <input type="password" {...register('password')} />
-              <button onClick={handleLogin}>Entrar</button>
+              <SigninInputContainer>
+                <p>Email</p>
+                <SigninInput type="email" {...register('email')} />
+              </SigninInputContainer>
+
+              <SigninInputContainer>
+                <p>Senha</p>
+                <SigninInput type="password" {...register('password')} />
+              </SigninInputContainer>
+
+              <SigninButtonContainer>
+                <SigninButton type="submit" onClick={handleLogin}>
+                  Entrar
+                </SigninButton>
+              </SigninButtonContainer>
             </form>
-          </SigninForm>
+          </SigninBox>
         </SigninRightBox>
-        <SigninImageBox></SigninImageBox>
+        <SigninImageBox>
+          <img src={men} alt="Homen fazendo pagamento com PayFriends" />
+        </SigninImageBox>
       </SigninContainer>
     </>
   )
