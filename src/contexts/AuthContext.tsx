@@ -1,10 +1,9 @@
 import { createContext, ReactNode, useState } from 'react'
 import { toast } from 'react-toastify'
-import { IAccount, IUser } from '../interfaces/IAccount'
+import { IUser } from '../interfaces/IAccount'
 interface AuthContextType {
   user: IUser[]
   setUser: (user: IUser[]) => void
-  account: IAccount
   signin: (email: string, password: string) => string | undefined
   token: string
   sigout: () => void
@@ -18,7 +17,6 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<IUser[]>([])
-  const [account, setAccount] = useState<IAccount>({} as IAccount)
 
   const signin = (email: string, password: string) => {
     const hasUser = user?.filter((user) => user.email === email)
@@ -27,7 +25,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       if (hasUser[0].email === email && hasUser[0].password === password) {
         const token = Math.random().toString(36).substring(2)
         localStorage.setItem('USER_TOKEN', JSON.stringify({ token }))
-        setAccount({ email, password })
+        localStorage.setItem('USER_INFO', JSON.stringify({ token }))
         return (window.location.href = '/home')
       } else {
         toast.error('E-mail ou senha incorretos ')
@@ -37,6 +35,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   const sigout = () => {
     localStorage.removeItem('USER_TOKEN')
+    localStorage.removeItem('USER_INFO')
     window.location.href = '/'
   }
 
@@ -52,9 +51,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   })
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, account, signin, token, sigout }}
-    >
+    <AuthContext.Provider value={{ user, setUser, signin, token, sigout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -1,10 +1,19 @@
-import { HeaderButtonSigout, HeaderContainer, HeaderContent } from './styles'
+import {
+  HeaderBox,
+  HeaderButtonSigout,
+  HeaderButtonUser,
+  HeaderContainer,
+  // eslint-disable-next-line prettier/prettier
+  HeaderContent
+} from './styles'
 
-import { SignOut } from 'phosphor-react'
+import * as Dialog from '@radix-ui/react-dialog'
+import { SignOut, User } from 'phosphor-react'
 import { useContext } from 'react'
 import avatar from '../../assets/avatar.svg'
 import logo from '../../assets/logo-white.svg'
 import { AuthContext } from '../../contexts/AuthContext'
+import { ModalUser } from '../Modals/ModalUser'
 
 export function Header() {
   const { sigout } = useContext(AuthContext)
@@ -14,10 +23,23 @@ export function Header() {
       <HeaderContent>
         <img src={logo} alt="" />
 
-        <HeaderButtonSigout onClick={sigout}>
+        <HeaderBox>
           <img src={avatar} alt="" />
-          <SignOut size={32} />
-        </HeaderButtonSigout>
+
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <HeaderButtonUser>
+                <User size={32} color="white" />
+              </HeaderButtonUser>
+            </Dialog.Trigger>
+
+            <ModalUser />
+          </Dialog.Root>
+
+          <HeaderButtonSigout onClick={sigout}>
+            <SignOut size={32} />
+          </HeaderButtonSigout>
+        </HeaderBox>
       </HeaderContent>
     </HeaderContainer>
   )

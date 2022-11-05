@@ -15,20 +15,37 @@ export const HeaderContent = styled.div`
   align-items: center;
 `
 
-export const HeaderButtonSigout = styled.div`
+export const HeaderButtonSigout = styled.button`
   height: 50px;
   background: ${(props) => props.theme['gray-200']};
-  border-radius: 999em;
+  border-radius: 10px;
   align-items: center;
   justify-content: center;
   display: flex;
-  padding: 0 1.25rem;
-  width: 140px;
-  justify-content: space-between;
+  width: 50px;
 
   cursor: pointer;
   &:hover {
     background: ${(props) => props.theme['red-300']};
     transition: background-color 0.2s;
   }
+`
+
+export const HeaderButtonUser = styled.button`
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 50px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+`
+
+export const HeaderBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+  justify-content: space-between;
 `

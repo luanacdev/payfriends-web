@@ -15,11 +15,12 @@ import {
   useGridSelector
 } from '@mui/x-data-grid'
 import * as Dialog from '@radix-ui/react-dialog'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import moment from 'moment'
 import { CheckCircle, Pencil, Trash, XCircle } from 'phosphor-react'
 import { useEffect, useState } from 'react'
 
+import { toast } from 'react-toastify'
 import { ITasks } from '../../interfaces/ITasks'
 import { getTasks } from '../../services/tasks.service'
 import formatMonetaryValue from '../../utils/formatMonetaryValue'
@@ -99,7 +100,6 @@ const columns: GridColDef[] = [
     headerName: '',
     width: 130,
     renderCell: (id) => {
-      console.log(id, 'kkkkk')
       return editRow(id)
     },
     type: 'number',
@@ -130,8 +130,8 @@ export function Table() {
       .then((res: AxiosResponse) => {
         setTasks(res.data)
       })
-      .catch((err: AxiosError) => {
-        console.log(err)
+      .catch(() => {
+        toast.error('Erro interno no servidor')
       })
   }, [setTasks])
 
@@ -161,7 +161,6 @@ export function Table() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        editMode="row"
         components={{
           Pagination: CustomPagination,
           Toolbar: CustomToolbar,

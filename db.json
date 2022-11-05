@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "name": "Nicoline Squier",
-      "username": "nsquiert",
-      "title": "Senior Cost Accountant",
-      "value": "380",
-      "isPayed": true,
-      "id": 30
-    },
-    {
       "name": "Margarethe Heart",
       "username": "mheartu",
       "title": "VP Quality Control",
@@ -442,14 +434,13 @@
       "isPayed": true
     },
     {
-      "id": 75,
       "name": "Ardeen Ferreira",
       "username": "aferreira22",
       "title": "Office Assistant III",
-      "value": 62.33,
-      "date": "2020-04-22T02:27:21Z",
-      "image": "https://robohash.org/aperiamundedolorum.png?size=150x150&set=set1",
-      "isPayed": true
+      "value": "62.33",
+      "date": "2022-11-05T17:35",
+      "isPayed": true,
+      "id": 75
     },
     {
       "id": 76,
