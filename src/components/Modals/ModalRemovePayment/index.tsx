@@ -1,18 +1,21 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import moment from 'moment'
 import { X } from 'phosphor-react'
 import { deleteTask } from '../../../services/tasks.service'
+import formatMonetaryValue from '../../../utils/formatMonetaryValue'
 import {
   CancelButton,
   CloseButton,
   ContainerButtons,
   ContainerInfoTask,
   Content,
+  // eslint-disable-next-line prettier/prettier
   Overlay
 } from './styles'
 
-export function ModalRemovePayment(id: any) {
+export function ModalRemovePayment({ taskInfo }: any) {
   const handleDeleteTask = async () => {
-    await deleteTask(id)
+    await deleteTask(taskInfo.id)
       .then(() => {
         window.alert('Task removida com sucesso!')
       })
@@ -29,15 +32,20 @@ export function ModalRemovePayment(id: any) {
         <Dialog.Title>Excluir pagamento</Dialog.Title>
 
         <ContainerInfoTask>
-          <p>Usuário: Luana</p>
-          <p>Data: 20/02/2022</p>
-          <p>Valor: R$ 400,00</p>
+          <p>Nome: {taskInfo.name}</p>
+          <p>Usuário: {taskInfo.username}</p>
+
+          <p>Titulo: {taskInfo.title}</p>
+          <p>Data: {moment(taskInfo.date).format('LLL')}</p>
+          <p>Valor: {formatMonetaryValue(taskInfo.value)}</p>
+          <p>
+            Status:
+            {taskInfo.isPayed ? ' Pago' : ' Pendente'}
+          </p>
         </ContainerInfoTask>
 
         <ContainerButtons>
-          <button type="submit" onClick={() => handleDeleteTask}>
-            CONFIRMAR
-          </button>
+          <button onClick={() => handleDeleteTask()}>CONFIRMAR</button>
           <CancelButton>CANCELAR</CancelButton>
         </ContainerButtons>
 

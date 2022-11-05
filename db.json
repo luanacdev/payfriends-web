@@ -1,16 +1,6 @@
 {
   "tasks": [
     {
-      "id": 16,
-      "name": "Viviyan Birdwhistell",
-      "username": "vbirdwhistellf",
-      "title": "Product Engineer",
-      "value": 316.34,
-      "date": "2020-10-12T03:18:18Z",
-      "image": "https://robohash.org/suscipitcommodiunde.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
       "id": 17,
       "name": "Rolf Winpenny",
       "username": "rwinpennyg",

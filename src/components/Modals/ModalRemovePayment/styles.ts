@@ -37,7 +37,7 @@ export const ContainerButtons = styled.div`
   justify-content: center;
   justify-content: space-between;
   margin-top: 1rem;
-  button[type='submit'] {
+  button {
     height: 30px;
     border: 0;
     background: ${(props) => props.theme['blue-400']};

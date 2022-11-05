@@ -28,7 +28,7 @@ import { ModalRemovePayment } from '../Modals/ModalRemovePayment'
 import { TableBoxButtons, TableButtonEdit } from './styles'
 
 function renderingPaymentStatus(params: GridRenderCellParams<boolean>) {
-  return params.value === true ? (
+  return params.value ? (
     <CheckCircle size={25} color="green" />
   ) : (
     <XCircle size={25} color="red" />
@@ -44,8 +44,8 @@ function formatValueDate(params: GridRenderCellParams<string>) {
 }
 
 function editRow(params: GridRenderCellParams<number>) {
-  const id = params.value
-  console.log(id)
+  const taskInfo = params.row
+
   return (
     <TableBoxButtons>
       <Dialog.Root>
@@ -65,14 +65,15 @@ function editRow(params: GridRenderCellParams<number>) {
           </TableButtonEdit>
         </Dialog.Trigger>
 
-        <ModalRemovePayment id={id} />
+        <ModalRemovePayment taskInfo={taskInfo} />
       </Dialog.Root>
     </TableBoxButtons>
   )
 }
 
 const columns: GridColDef[] = [
-  { field: 'name', headerName: 'Usuário', width: 160 },
+  { field: 'name', headerName: 'Nome', width: 160 },
+  { field: 'username', headerName: 'Usuario', width: 160 },
   { field: 'title', headerName: 'Título', width: 250 },
   {
     field: 'date',
@@ -96,8 +97,11 @@ const columns: GridColDef[] = [
   {
     field: 'id',
     headerName: '',
-    width: 300,
-    renderCell: editRow,
+    width: 130,
+    renderCell: (id) => {
+      console.log(id, 'kkkkk')
+      return editRow(id)
+    },
     type: 'number',
   },
 ]
