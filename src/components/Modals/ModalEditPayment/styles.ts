@@ -53,6 +53,11 @@ export const ContainerInput = styled.div`
       color: ${(props) => props.theme['gray-400']};
     }
   }
+
+  button {
+    border: 0;
+    cursor: pointer;
+  }
 `
 
 export const ContainerButtons = styled.div`
@@ -89,5 +94,22 @@ export const CancelButton = styled(Dialog.Close)`
   &:hover {
     background: ${(props) => props.theme['gray-200']};
     transition: background-color 0.2s;
+  }
+`
+
+export const ContainerRaioButtons = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  div {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    input {
+      cursor: pointer;
+    }
   }
 `

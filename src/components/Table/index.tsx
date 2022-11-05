@@ -55,7 +55,7 @@ function editRow(params: GridRenderCellParams<number>) {
           </TableButtonEdit>
         </Dialog.Trigger>
 
-        <ModalEditPayment />
+        <ModalEditPayment taskInfo={taskInfo} />
       </Dialog.Root>
 
       <Dialog.Root>
