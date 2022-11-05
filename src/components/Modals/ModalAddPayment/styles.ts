@@ -91,3 +91,20 @@ export const CancelButton = styled(Dialog.Close)`
     transition: background-color 0.2s;
   }
 `
+
+export const ContainerRaioButtons = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  div {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    input {
+      cursor: pointer;
+    }
+  }
+`

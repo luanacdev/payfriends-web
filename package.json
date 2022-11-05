@@ -10,9 +10,6 @@
     "api": "json-server --watch db.json"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.3.7",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
     "@mui/x-data-grid": "^5.17.9",
     "@radix-ui/react-dialog": "^1.0.2",
     "axios": "^1.1.3",

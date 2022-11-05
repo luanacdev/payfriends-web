@@ -9,3 +9,23 @@ export const deleteTask = (id: number) => {
   const resonse = api.delete(`/tasks/${id}`)
   return resonse
 }
+
+export const postTask = ({
+  id,
+  name,
+  username,
+  title,
+  value,
+  date,
+  isPayed,
+}: any) => {
+  const resonse = api.post(`/tasks`, {
+    name,
+    username,
+    title,
+    value,
+    date,
+    isPayed,
+  })
+  return resonse
+}

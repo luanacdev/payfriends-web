@@ -5,6 +5,6 @@ export interface ITasks {
   title: string
   value: number
   date: string
-  image: string
+  image?: string
   isPayed: boolean
 }
