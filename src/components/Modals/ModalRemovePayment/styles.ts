@@ -18,37 +18,6 @@ export const Content = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  form {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    input {
-      border-radius: 6px;
-      border: 0;
-      background: ${(props) => props.theme['gray-900']};
-      color: ${(props) => props.theme['gray-300']};
-      padding: 1rem;
-      &::placeholder {
-        color: ${(props) => props.theme['gray-200']};
-      }
-    }
-    button[type='submit'] {
-      height: 50px;
-      border: 0;
-      background: ${(props) => props.theme['green-500']};
-      color: ${(props) => props.theme.white};
-      font-weight: bold;
-      padding: 0 1.25rem;
-      border-radius: 6px;
-      margin-top: 1.25rem;
-      cursor: pointer;
-      &:hover {
-        background: ${(props) => props.theme['green-700']};
-        transition: background-color 0.2s;
-      }
-    }
-  }
 `
 
 export const CloseButton = styled(Dialog.Close)`
@@ -59,5 +28,44 @@ export const CloseButton = styled(Dialog.Close)`
   right: 1.5rem;
   line-height: 0;
   cursor: pointer;
-  color: ${(props) => props.theme['gray-200']};
+`
+export const ContainerButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  button[type='submit'] {
+    height: 30px;
+    border: 0;
+    background: ${(props) => props.theme['blue-400']};
+    color: ${(props) => props.theme.white};
+    font-weight: bold;
+    padding: 0 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover {
+      background: ${(props) => props.theme['blue-900']};
+      transition: background-color 0.2s;
+    }
+  }
+`
+export const CancelButton = styled(Dialog.Close)`
+  height: 30px;
+  border: 0;
+  background: ${(props) => props.theme['gray-300']};
+  font-weight: bold;
+  padding: 0 1.25rem;
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    background: ${(props) => props.theme['gray-200']};
+    transition: background-color 0.2s;
+  }
+`
+
+export const ContainerInfoTask = styled.div`
+  padding-top: 1rem;
 `

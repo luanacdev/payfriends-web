@@ -1,6 +1,14 @@
+/* eslint-disable prettier/prettier */
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
-import { CloseButton, Content, Overlay } from './styles'
+import {
+  CancelButton,
+  CloseButton,
+  ContainerButtons,
+  ContainerInput,
+  Content,
+  Overlay
+} from './styles'
 
 export function ModalEditPayment() {
   return (
@@ -15,11 +23,20 @@ export function ModalEditPayment() {
         </CloseButton>
 
         <form>
-          <input type="text" placeholder="Titulo" />
-          <input type="number" placeholder="Data" />
-          <input type="text" placeholder="Valor" />
+          <ContainerInput>
+            <input type="text" placeholder="Usuário*" required />
+            <input type="number" placeholder="Valor*" required />
+          </ContainerInput>
 
-          <button type="submit">Cadastrar</button>
+          <ContainerInput>
+            <input type="datetime-local" placeholder="Data" required />
+            <input type="string" placeholder="Titulo" required />
+          </ContainerInput>
+
+          <ContainerButtons>
+            <button type="submit">SALVAR</button>
+            <CancelButton>CANCELAR</CancelButton>
+          </ContainerButtons>
         </form>
       </Content>
     </Dialog.Portal>

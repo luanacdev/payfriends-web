@@ -19,6 +19,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import moment from 'moment'
 import { CheckCircle, Pencil, Trash, XCircle } from 'phosphor-react'
 import { useEffect, useState } from 'react'
+
 import { ITasks } from '../../interfaces/ITasks'
 import { getTasks } from '../../services/tasks.service'
 import formatMonetaryValue from '../../utils/formatMonetaryValue'
@@ -43,6 +44,8 @@ function formatValueDate(params: GridRenderCellParams<string>) {
 }
 
 function editRow(params: GridRenderCellParams<number>) {
+  const id = params.value
+  console.log(id)
   return (
     <TableBoxButtons>
       <Dialog.Root>
@@ -62,7 +65,7 @@ function editRow(params: GridRenderCellParams<number>) {
           </TableButtonEdit>
         </Dialog.Trigger>
 
-        <ModalRemovePayment />
+        <ModalRemovePayment id={id} />
       </Dialog.Root>
     </TableBoxButtons>
   )
@@ -146,6 +149,7 @@ export function Table() {
         width: '100%',
         margin: 'auto',
         background: '#FFFF',
+        borderRadius: '5px',
       }}
     >
       <DataGrid

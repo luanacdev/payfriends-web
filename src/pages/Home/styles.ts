@@ -7,8 +7,18 @@ export const HeaderTitle = styled.div`
 `
 
 export const HeaderButton = styled.button`
-  background: ${(props) => props.theme['blue-900']};
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 20%;
+  border-radius: 3px;
+  border: 1px solid #007dfe;
+  background-color: ${(props) => props.theme['blue-400']};
+  color: white;
+  cursor: pointer;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `
 
 export const HomeHeader = styled.div`

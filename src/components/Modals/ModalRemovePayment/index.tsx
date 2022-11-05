@@ -1,23 +1,49 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
-import { CloseButton, Content, Overlay } from './styles'
+import { deleteTask } from '../../../services/tasks.service'
+import {
+  CancelButton,
+  CloseButton,
+  ContainerButtons,
+  ContainerInfoTask,
+  Content,
+  Overlay
+} from './styles'
 
-export function ModalRemovePayment() {
+export function ModalRemovePayment(id: any) {
+  const handleDeleteTask = async () => {
+    await deleteTask(id)
+      .then(() => {
+        window.alert('Task removida com sucesso!')
+      })
+      .catch(() => {
+        return window.alert('Não foi possível remover!')
+      })
+  }
+
   return (
     <Dialog.Portal>
       <Overlay />
 
       <Content>
-        <Dialog.Title>Remover pagamento</Dialog.Title>
+        <Dialog.Title>Excluir pagamento</Dialog.Title>
+
+        <ContainerInfoTask>
+          <p>Usuário: Luana</p>
+          <p>Data: 20/02/2022</p>
+          <p>Valor: R$ 400,00</p>
+        </ContainerInfoTask>
+
+        <ContainerButtons>
+          <button type="submit" onClick={() => handleDeleteTask}>
+            CONFIRMAR
+          </button>
+          <CancelButton>CANCELAR</CancelButton>
+        </ContainerButtons>
 
         <CloseButton>
           <X size={24} />
         </CloseButton>
-
-        <h1>Tem certeza que deseja remover esse pagamento ?</h1>
-
-        <button>sim</button>
-        <button>cancelar</button>
       </Content>
     </Dialog.Portal>
   )
