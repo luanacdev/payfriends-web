@@ -34,7 +34,7 @@ export const ContainerRow = styled.div`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-
+  align-items: center;
   button {
     border: 0;
     cursor: pointer;
@@ -51,20 +51,11 @@ export const ContainerButtons = styled.div`
   margin-top: 1rem;
 `
 
-export const ContainerRaioButtons = styled.div`
+export const ButtonPayed = styled.button`
   align-items: center;
   justify-content: center;
   display: flex;
   justify-content: space-between;
   width: 45%;
-  div {
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    input {
-      margin-left: 10px;
-      cursor: pointer;
-    }
-  }
+  background-color: red;
 `

@@ -91,7 +91,7 @@ export const ContainerRow = styled.div`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-
+  align-items: center;
   button {
     border: 0;
     cursor: pointer;

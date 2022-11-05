@@ -4,8 +4,8 @@ import moment from 'moment'
 import { Calendar, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { postTask } from '../../../services/tasks.service'
-import formatMonetaryValue from '../../../utils/formatMonetaryValue'
+import { toast } from 'react-toastify'
+import { updateTask } from '../../../services/tasks.service'
 import { MESSAGE } from '../../../utils/messages'
 import { ButtonCancel, ButtonCloseModal, ButtonSyles } from '../../Form/Button/styles'
 
@@ -15,16 +15,14 @@ import {
   InputSyles
 } from '../../Form/Input/styles'
 import {
-
-  ContainerButtons,
-  ContainerRaioButtons,
-  ContainerRow,
+  ContainerButtons, ContainerRow,
   Content,
   Overlay
 } from './styles'
 
 export function ModalEditPayment({ taskInfo }: any) {
   const [editDate, setEditDate] = useState(false)
+  const [statusPayed, setStatusPayed] = useState(taskInfo.isPayed); 
 
   const {
     handleSubmit,
@@ -38,22 +36,24 @@ export function ModalEditPayment({ taskInfo }: any) {
     title,
     value,
     date,
-    isPayed,
+    data
   }: any) => {
-    await postTask({
+    await updateTask({
       id: taskInfo.id,
       name,
       username,
       title,
       value,
       date,
-      isPayed,
+      isPayed: statusPayed,
     })
       .then(() => {
-        window.alert('Pagamento criado com sucesso!')
+        toast.success('Pagamento editado!')
+        window.location.href = '/home'
+
       })
       .catch(() => {
-        window.alert('Não foi possível criar pagamento!')
+        toast.error('Não foi possível editar pagamento!')
       })
   }
 
@@ -119,13 +119,12 @@ export function ModalEditPayment({ taskInfo }: any) {
 
             <ContainerInput>
               <InputSyles
-                type="number"
                 placeholder="Valor*"
                 id="value"
                 {...register('value', {
                   required: true,
                 })}
-                defaultValue={formatMonetaryValue(taskInfo.value)}
+                defaultValue={taskInfo.value}
               />
               {errors.value && (
                 <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
@@ -162,32 +161,16 @@ export function ModalEditPayment({ taskInfo }: any) {
               </>
             )}
 
-            <ContainerRaioButtons>
-              <div>
-                <p>Pago</p>
-                <input
-                  type="radio"
-                  id="isPayed"
-                  value="true"
-                  {...register('isPayed', {
-                    required: true,
-                  })}
-                  defaultChecked={taskInfo.isPayed === true}
-                />
-              </div>
-              <div>
-                <p>Pendente</p>
-                <input
-                  type="radio"
-                  id="isPayed"
-                  value="false"
-                  defaultChecked={taskInfo.isPayed === false}
-                  {...register('isPayed', {
-                    required: true,
-                  })}
-                />
-              </div>
-            </ContainerRaioButtons>
+              <ButtonSyles
+                type="button"
+                onClick={() => setStatusPayed(!statusPayed)}
+                bgColor={statusPayed ? '#00B37E' : '#F75A68'}
+                transitionColor={statusPayed ? '#015F43' : '#7A1921'}
+                whi="45%"
+                hei='30px'
+              >
+                {statusPayed ? 'Pago' : 'Pendente'}
+              </ButtonSyles>
           </ContainerRow>
 
           <ContainerButtons>

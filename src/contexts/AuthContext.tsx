@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 import { IAccount, IUser } from '../interfaces/IAccount'
-
 interface AuthContextType {
   user: IUser[]
   setUser: (user: IUser[]) => void
@@ -29,13 +29,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         localStorage.setItem('USER_TOKEN', JSON.stringify({ token }))
         setAccount({ email, password })
         return (window.location.href = '/home')
+      } else {
+        toast.error('E-mail ou senha incorretos ')
       }
-
-      if (hasUser[0].email === email || hasUser[0].password === password) {
-        return 'E-mail ou senha incorretos'
-      }
-    } else {
-      return 'Usuário não cadastrado'
     }
   }
 

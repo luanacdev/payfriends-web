@@ -1,6 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import moment from 'moment'
 import { X } from 'phosphor-react'
+import { toast } from 'react-toastify'
 import { deleteTask } from '../../../services/tasks.service'
 import formatMonetaryValue from '../../../utils/formatMonetaryValue'
 import {
@@ -9,6 +10,7 @@ import {
   // eslint-disable-next-line prettier/prettier
   ButtonSyles
 } from '../../Form/Button/styles'
+
 import {
   ContainerButtons,
   ContainerInfoTask,
@@ -21,10 +23,11 @@ export function ModalRemovePayment({ taskInfo }: any) {
   const handleDeleteTask = async () => {
     await deleteTask(taskInfo.id)
       .then(() => {
-        window.alert('Task removida com sucesso!')
+        toast.success('Pagamento removido!')
+        window.location.href = '/home'
       })
       .catch(() => {
-        return window.alert('Não foi possível remover!')
+        return toast.error('Não foi possível remover pagamento!')
       })
   }
 

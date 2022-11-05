@@ -4,6 +4,9 @@ import styled from 'styled-components'
 interface IButtonProps {
   bgColor?: string
   fontColor?: string
+  transitionColor?: string
+  whi?: string
+  hei?: string
 }
 
 export const ButtonSyles = styled.button`
@@ -12,17 +15,20 @@ export const ButtonSyles = styled.button`
   border-radius: 6px;
   padding: 0 1.25rem;
 
+  width: ${(props: IButtonProps) => (props.whi ? props.whi : '')};
+  height: ${(props: IButtonProps) => (props.hei ? props.hei : '')};
+
   color: ${(props: IButtonProps) =>
     props.fontColor ? props.fontColor : '#fff'};
 
   font-weight: bold;
-
   background: ${(props: IButtonProps) =>
     props.bgColor ? props.bgColor : '#007DFE'};
 
   cursor: pointer;
   &:hover {
-    background: ${(props) => props.theme['blue-900']};
+    background: ${(props: IButtonProps) =>
+      props.transitionColor ? props.transitionColor : '#002D69'};
     transition: background-color 0.2s;
   }
 `

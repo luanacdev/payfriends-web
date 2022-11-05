@@ -1,6 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { postTask } from '../../../services/tasks.service'
 import { MESSAGE } from '../../../utils/messages'
 import {
@@ -17,7 +19,6 @@ import {
 } from '../../Form/Input/styles'
 import {
   ContainerButtons,
-  ContainerRadioButtons,
   ContainerRow,
   Content,
   // eslint-disable-next-line prettier/prettier
@@ -30,6 +31,7 @@ export function ModalAddPayment() {
     register,
     formState: { errors },
   } = useForm()
+  const [statusPayed, setStatusPayed] = useState(false)
 
   const onSubmit = async ({
     name,
@@ -46,13 +48,14 @@ export function ModalAddPayment() {
       title,
       value,
       date,
-      isPayed,
+      isPayed: statusPayed,
     })
       .then(() => {
-        window.alert('Pagamento criado com sucesso!')
+        toast.success('Pagamento criado!')
+        window.location.href = '/home'
       })
       .catch(() => {
-        window.alert('Não foi possível criar pagamento!')
+        return toast.error('Não foi possível criar pagamento!')
       })
   }
 
@@ -144,31 +147,16 @@ export function ModalAddPayment() {
               )}
             </ContainerInput>
 
-            <ContainerRadioButtons>
-              <div>
-                <p>Pago</p>
-                <input
-                  type="radio"
-                  id="isPayed"
-                  value="true"
-                  {...register('isPayed', {
-                    required: true,
-                  })}
-                />
-              </div>
-              <div>
-                <p>Pendente</p>
-                <input
-                  type="radio"
-                  id="isPayed"
-                  value="false"
-                  checked
-                  {...register('isPayed', {
-                    required: true,
-                  })}
-                />
-              </div>
-            </ContainerRadioButtons>
+            <ButtonSyles
+              type="button"
+              onClick={() => setStatusPayed(!statusPayed)}
+              bgColor={statusPayed ? '#00B37E' : '#F75A68'}
+              transitionColor={statusPayed ? '#015F43' : '#7A1921'}
+              whi="45%"
+              hei="30px"
+            >
+              {statusPayed ? 'Pago' : 'Pendente'}
+            </ButtonSyles>
           </ContainerRow>
 
           <ContainerButtons>

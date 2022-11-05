@@ -1,5 +1,5 @@
-import { AxiosError, AxiosResponse } from 'axios'
-import { useContext } from 'react'
+import { AxiosResponse } from 'axios'
+import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAccount } from '../../services/account.service'
@@ -16,25 +16,36 @@ import {
   SigninRightBox
 } from './styles'
 
+import { toast } from 'react-toastify'
 import logo from '../../assets/logo.svg'
 import men from '../../assets/men-on-cell-phone.svg'
+import { ErrorMessage } from '../../components/Form/Input/styles'
+import { MESSAGE } from '../../utils/messages'
 
 export function Signin() {
   const { setUser, signin } = useContext(AuthContext)
 
-  const { register, handleSubmit } = useForm()
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm()
 
   const handleLogin = async (data: any) => {
-    await getAccount()
-      .then((res: AxiosResponse) => {
-        localStorage.removeItem('USER_TOKEN')
-        setUser(res.data)
-        signin(data.email, data.password)
-      })
-      .catch((err: AxiosError) => {
-        console.log(err)
-      })
+    signin(data.email, data.password)
   }
+
+  useEffect(() => {
+    localStorage.removeItem('USER_TOKEN')
+
+    getAccount()
+      .then(async (res: AxiosResponse) => {
+        setUser(res.data)
+      })
+      .catch(() => {
+        return toast.error('Erro interno no servidor.')
+      })
+  }, [setUser])
 
   return (
     <>
@@ -49,12 +60,30 @@ export function Signin() {
             <form onSubmit={handleSubmit(handleLogin)}>
               <SigninInputContainer>
                 <p>Email</p>
-                <SigninInput type="email" {...register('email')} />
+                <SigninInput
+                  type="email"
+                  {...register('email', {
+                    required: true,
+                  })}
+                  placeholder="example@example.com"
+                />
+                {errors.email && (
+                  <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+                )}
               </SigninInputContainer>
 
               <SigninInputContainer>
                 <p>Senha</p>
-                <SigninInput type="password" {...register('password')} />
+                <SigninInput
+                  type="password"
+                  {...register('password', {
+                    required: true,
+                  })}
+                  placeholder="*****"
+                />
+                {errors.password && (
+                  <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+                )}
               </SigninInputContainer>
 
               <SigninButtonContainer>

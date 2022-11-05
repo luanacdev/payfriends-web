@@ -31,3 +31,23 @@ export const postTask = ({
   })
   return resonse
 }
+
+export const updateTask = ({
+  id,
+  name,
+  username,
+  title,
+  value,
+  date,
+  isPayed,
+}: ITasks) => {
+  const resonse = api.put(`/tasks/${id}`, {
+    name,
+    username,
+    title,
+    value,
+    date,
+    isPayed,
+  })
+  return resonse
+}

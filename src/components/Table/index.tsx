@@ -133,7 +133,7 @@ export function Table() {
       .catch((err: AxiosError) => {
         console.log(err)
       })
-  }, [])
+  }, [setTasks])
 
   function CustomToolbar() {
     return (
