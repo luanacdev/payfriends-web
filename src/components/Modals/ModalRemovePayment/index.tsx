@@ -4,8 +4,12 @@ import { X } from 'phosphor-react'
 import { deleteTask } from '../../../services/tasks.service'
 import formatMonetaryValue from '../../../utils/formatMonetaryValue'
 import {
-  CancelButton,
-  CloseButton,
+  ButtonCancel,
+  ButtonCloseModal,
+  // eslint-disable-next-line prettier/prettier
+  ButtonSyles
+} from '../../Form/Button/styles'
+import {
   ContainerButtons,
   ContainerInfoTask,
   Content,
@@ -31,11 +35,15 @@ export function ModalRemovePayment({ taskInfo }: any) {
       <Content>
         <Dialog.Title>Excluir pagamento</Dialog.Title>
 
+        <ButtonCloseModal>
+          <X size={24} />
+        </ButtonCloseModal>
+
         <ContainerInfoTask>
           <p>Nome: {taskInfo.name}</p>
           <p>Usuário: {taskInfo.username}</p>
 
-          <p>Titulo: {taskInfo.title}</p>
+          <p>Título: {taskInfo.title}</p>
           <p>Data: {moment(taskInfo.date).format('LLL')}</p>
           <p>Valor: {formatMonetaryValue(taskInfo.value)}</p>
           <p>
@@ -45,13 +53,11 @@ export function ModalRemovePayment({ taskInfo }: any) {
         </ContainerInfoTask>
 
         <ContainerButtons>
-          <button onClick={() => handleDeleteTask()}>CONFIRMAR</button>
-          <CancelButton>CANCELAR</CancelButton>
+          <ButtonSyles onClick={() => handleDeleteTask()}>
+            CONFIRMAR
+          </ButtonSyles>
+          <ButtonCancel>CANCELAR</ButtonCancel>
         </ContainerButtons>
-
-        <CloseButton>
-          <X size={24} />
-        </CloseButton>
       </Content>
     </Dialog.Portal>
   )

@@ -2,12 +2,23 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { postTask } from '../../../services/tasks.service'
+import { MESSAGE } from '../../../utils/messages'
 import {
-  CancelButton,
-  CloseButton,
-  ContainerButtons,
+  ButtonCancel,
+  ButtonCloseModal,
+  // eslint-disable-next-line prettier/prettier
+  ButtonSyles
+} from '../../Form/Button/styles'
+import {
   ContainerInput,
-  ContainerRaioButtons,
+  ErrorMessage,
+  // eslint-disable-next-line prettier/prettier
+  InputSyles
+} from '../../Form/Input/styles'
+import {
+  ContainerButtons,
+  ContainerRadioButtons,
+  ContainerRow,
   Content,
   // eslint-disable-next-line prettier/prettier
   Overlay
@@ -52,69 +63,88 @@ export function ModalAddPayment() {
       <Content>
         <Dialog.Title>Adicionar pagamento</Dialog.Title>
 
-        <CloseButton>
+        <ButtonCloseModal>
           <X size={24} />
-        </CloseButton>
+        </ButtonCloseModal>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ContainerInput>
-            <input
-              type="string"
-              placeholder="Nome"
-              required
-              id="name"
-              {...register('name', {
-                required: true,
-              })}
-            />
-            {errors.name && <span>O campo nome não pode ser vazio.</span>}
-            <input
-              id="username"
-              type="string"
-              placeholder="Usuário*"
-              {...register('username', {
-                required: true,
-              })}
-            />
-            {errors.username && (
-              <span>O campo usuário não pode ser vazio.</span>
-            )}
-          </ContainerInput>
+          <ContainerRow>
+            <ContainerInput>
+              <InputSyles
+                type="string"
+                placeholder="Nome"
+                required
+                id="name"
+                {...register('name', {
+                  required: true,
+                })}
+              />
+              {errors.name && (
+                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+              )}
+            </ContainerInput>
 
-          <ContainerInput>
-            <input
-              id="title"
-              type="string"
-              placeholder="Título*"
-              {...register('title', {
-                required: true,
-              })}
-            />
-            {errors.title && <span>O campo título não pode ser vazio.</span>}
+            <ContainerInput>
+              <InputSyles
+                id="username"
+                type="string"
+                placeholder="Usuário*"
+                {...register('username', {
+                  required: true,
+                })}
+              />
+              {errors.username && (
+                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+              )}
+            </ContainerInput>
+          </ContainerRow>
 
-            <input
-              type="number"
-              placeholder="Valor*"
-              id="value"
-              {...register('value', {
-                required: true,
-              })}
-            />
-            {errors.value && <span>O campo valor não pode ser vazio.</span>}
-          </ContainerInput>
+          <ContainerRow>
+            <ContainerInput>
+              <InputSyles
+                id="title"
+                type="string"
+                placeholder="Título*"
+                {...register('title', {
+                  required: true,
+                })}
+              />
+              {errors.title && (
+                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+              )}
+            </ContainerInput>
 
-          <ContainerInput>
-            <input
-              type="datetime-local"
-              placeholder="Data"
-              id="date"
-              {...register('date', {
-                required: true,
-              })}
-            />
-            {errors.date && <span>O campo data não pode ser vazio.</span>}
+            <ContainerInput>
+              <InputSyles
+                type="number"
+                placeholder="Valor*"
+                id="value"
+                {...register('value', {
+                  required: true,
+                })}
+              />
+              {errors.value && (
+                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+              )}
+            </ContainerInput>
+          </ContainerRow>
 
-            <ContainerRaioButtons>
+          <ContainerRow>
+            <ContainerInput>
+              <InputSyles
+                type="datetime-local"
+                placeholder="Data"
+                id="date"
+                {...register('date', {
+                  required: true,
+                })}
+              />
+              {errors.date && (
+                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
+              )}
+            </ContainerInput>
+
+            <ContainerRadioButtons>
               <div>
                 <p>Pago</p>
                 <input
@@ -138,12 +168,12 @@ export function ModalAddPayment() {
                   })}
                 />
               </div>
-            </ContainerRaioButtons>
-          </ContainerInput>
+            </ContainerRadioButtons>
+          </ContainerRow>
 
           <ContainerButtons>
-            <button type="submit">SALVAR</button>
-            <CancelButton>CANCELAR</CancelButton>
+            <ButtonSyles type="submit">SALVAR</ButtonSyles>
+            <ButtonCancel>CANCELAR</ButtonCancel>
           </ContainerButtons>
         </form>
       </Content>

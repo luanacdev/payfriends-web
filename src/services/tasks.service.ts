@@ -1,3 +1,4 @@
+import { ITasks } from '../interfaces/ITasks'
 import { api } from './api'
 
 export const getTasks = () => {
@@ -18,7 +19,7 @@ export const postTask = ({
   value,
   date,
   isPayed,
-}: any) => {
+}: ITasks) => {
   const resonse = api.post(`/tasks`, {
     name,
     username,
@@ -26,6 +27,7 @@ export const postTask = ({
     value,
     date,
     isPayed,
+    id,
   })
   return resonse
 }

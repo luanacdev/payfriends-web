@@ -4,7 +4,7 @@ export interface ITasks {
   username: string
   title: string
   value: number
-  date: string
+  date: string | Date
   image?: string
   isPayed: boolean
 }

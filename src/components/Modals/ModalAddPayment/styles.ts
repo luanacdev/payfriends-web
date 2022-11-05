@@ -26,16 +26,6 @@ export const Content = styled(Dialog.Content)`
   }
 `
 
-export const CloseButton = styled(Dialog.Close)`
-  position: absolute;
-  background: transparent;
-  border: 0;
-  top: 1.5rem;
-  right: 1.5rem;
-  line-height: 0;
-  cursor: pointer;
-`
-
 export const ContainerInput = styled.div`
   display: flex;
   flex-direction: row;
@@ -78,21 +68,8 @@ export const ContainerButtons = styled.div`
     }
   }
 `
-export const CancelButton = styled(Dialog.Close)`
-  height: 30px;
-  border: 0;
-  background: ${(props) => props.theme['gray-300']};
-  font-weight: bold;
-  padding: 0 1.25rem;
-  border-radius: 6px;
-  cursor: pointer;
-  &:hover {
-    background: ${(props) => props.theme['gray-200']};
-    transition: background-color 0.2s;
-  }
-`
 
-export const ContainerRaioButtons = styled.div`
+export const ContainerRadioButtons = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
@@ -104,7 +81,19 @@ export const ContainerRaioButtons = styled.div`
     justify-content: center;
     display: flex;
     input {
+      margin-left: 10px;
       cursor: pointer;
     }
+  }
+`
+export const ContainerRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+
+  button {
+    border: 0;
+    cursor: pointer;
   }
 `
