@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import * as Dialog from '@radix-ui/react-dialog'
 import moment from 'moment'
 import { Calendar, X } from 'phosphor-react'

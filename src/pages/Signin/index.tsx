@@ -8,8 +8,8 @@ import {
   SigninButton,
   SigninButtonContainer,
   SigninContainer,
-  SigninImageBox, SigninLogoBox,
-  // eslint-disable-next-line prettier/prettier
+  SigninImageBox,
+  SigninLogoBox,
   SigninRightBox
 } from './styles'
 
