@@ -5,12 +5,11 @@
 
 ## Instruçõs para rodar o projeto 
 
-- Para instalar as dependências
-    npm install
+- Para instalar as dependências: 
+    `npm install`
     
-- Para rodar a fake api
-    npm run api 
+- Para rodar a fake api:
+   `npm run api`
 
-- Para rodar os testes unitários
-    npm run api 
-
+- Para rodar os testes unitários:
+   `npm test`
