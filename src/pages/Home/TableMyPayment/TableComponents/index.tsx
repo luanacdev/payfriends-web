@@ -14,6 +14,7 @@ import {
 import * as Dialog from '@radix-ui/react-dialog'
 import moment from 'moment'
 import { CheckCircle, Pencil, Trash, XCircle } from 'phosphor-react'
+import { useState } from 'react'
 import formatMonetaryValue from '../../../../utils/formatMonetaryValue'
 import { ModalEditPayment } from '../../ModalsPayment/ModalEditPayment'
 import { ModalRemovePayment } from '../../ModalsPayment/ModalRemovePayment'
@@ -21,27 +22,30 @@ import { TableBoxButtons, TableButtonEdit } from './styles'
 
 export function ButtonsEditAndDeleteTable(params: GridRenderCellParams<number>, fetchTasks: () => void) {
     const taskInfo = params.row
-  
+
+    const [editPaymentModalOpened, setEditPaymentModalOpened] = useState<boolean>(false)
+    const [removePaymentModalOpened, setRemovePaymentModalOpened] = useState<boolean>(false)
+    
     return (
       <TableBoxButtons>
-        <Dialog.Root>
+        <Dialog.Root open={editPaymentModalOpened} onOpenChange={setEditPaymentModalOpened}>
           <Dialog.Trigger asChild>
             <TableButtonEdit>
               <Pencil size={25} />
             </TableButtonEdit>
           </Dialog.Trigger>
   
-          <ModalEditPayment taskInfo={taskInfo} fetchTasks={fetchTasks} />
+          <ModalEditPayment taskInfo={taskInfo} fetchTasks={fetchTasks} close={() => setEditPaymentModalOpened(false)}/>
         </Dialog.Root>
   
-        <Dialog.Root>
+        <Dialog.Root open={removePaymentModalOpened} onOpenChange={setRemovePaymentModalOpened}>
           <Dialog.Trigger asChild>
             <TableButtonEdit>
               <Trash size={25} />
             </TableButtonEdit>
           </Dialog.Trigger>
   
-          <ModalRemovePayment taskInfo={taskInfo} fetchTasks={fetchTasks} />
+          <ModalRemovePayment taskInfo={taskInfo} fetchTasks={fetchTasks} close={() => setRemovePaymentModalOpened(false)}/>
         </Dialog.Root>
       </TableBoxButtons>
     )

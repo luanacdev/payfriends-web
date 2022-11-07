@@ -29,15 +29,16 @@ interface IModalRemovePaymentProps {
   }
   onTestRemove?: (id: number) => void
   fetchTasks: () => void
+  close: () => void;
 }
 
-export function ModalRemovePayment({ taskInfo, onTestRemove, fetchTasks }: IModalRemovePaymentProps) {
+export function ModalRemovePayment({ taskInfo, onTestRemove, fetchTasks, close }: IModalRemovePaymentProps) {
  
-
   const handleDeleteTask = async () => {
     await deleteTask(taskInfo.id)
       .then(() => {
         fetchTasks()
+        close()
         toast.success('Pagamento removido!')
       })
       .catch(() => {

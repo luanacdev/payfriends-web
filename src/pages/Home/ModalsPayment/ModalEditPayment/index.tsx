@@ -40,10 +40,10 @@ interface IModalEditPaymentProps {
     isPayed: boolean
   }
   fetchTasks: () => void
+  close: () => void
 }
 
-export function ModalEditPayment({ taskInfo, fetchTasks }: IModalEditPaymentProps) {
-  
+export function ModalEditPayment({ taskInfo, fetchTasks, close }: IModalEditPaymentProps) {
 
   const [editDate, setEditDate] = useState(false)
   const [statusPayed, setStatusPayed] = useState(taskInfo.isPayed); 
@@ -72,6 +72,7 @@ export function ModalEditPayment({ taskInfo, fetchTasks }: IModalEditPaymentProp
     })
       .then(() => {
         fetchTasks()
+        close()
         toast.success('Pagamento editado!')
       })
       .catch(() => {
