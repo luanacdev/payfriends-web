@@ -43,7 +43,7 @@ export function ModalEditPayment({ taskInfo }: any) {
       name,
       username,
       title,
-      value,
+      value: Number(value),
       date,
       isPayed: statusPayed,
     })

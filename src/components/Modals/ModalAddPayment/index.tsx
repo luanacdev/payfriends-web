@@ -1,37 +1,58 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'phosphor-react'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { postTask } from '../../../services/tasks.service'
 import { MESSAGE } from '../../../utils/messages'
 import {
   ButtonCancel,
   ButtonCloseModal,
-  // eslint-disable-next-line prettier/prettier
   ButtonSyles
 } from '../../Form/Button/styles'
 import {
   ContainerInput,
   ErrorMessage,
-  // eslint-disable-next-line prettier/prettier
   InputSyles
 } from '../../Form/Input/styles'
 import {
   ContainerButtons,
   ContainerRow,
   Content,
-  // eslint-disable-next-line prettier/prettier
   Overlay
 } from './styles'
 
-export function ModalAddPayment() {
+interface ModalAddPaymentProps {
+  onAddNewPayment: () => void;
+  close: () => void;
+  onTestAddPayment?: (params: FieldValues) => void
+}
+
+interface FormData {
+  name: string
+  username: string
+  title: string
+  value: number
+  date: string
+}
+
+export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: ModalAddPaymentProps) {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm()
+    resetField,
+    getValues
+  } = useForm<FormData>()
   const [statusPayed, setStatusPayed] = useState(false)
+
+  const clearFields = () => {
+    resetField('name')
+    resetField('username')
+    resetField('title')
+    resetField('value')
+    resetField('date')
+  }
 
   const onSubmit = async ({
     name,
@@ -39,20 +60,22 @@ export function ModalAddPayment() {
     title,
     value,
     date,
-    isPayed,
-  }: any) => {
+  }: FormData) => {
     await postTask({
       id: Math.random(),
       name,
       username,
       title,
-      value,
+      value: Number(value),
       date,
       isPayed: statusPayed,
     })
       .then(() => {
+        clearFields()
+        onAddNewPayment();        
+        close();
+
         toast.success('Pagamento criado!')
-        window.location.href = '/home'
       })
       .catch(() => {
         return toast.error('Não foi possível criar pagamento!')
@@ -70,7 +93,7 @@ export function ModalAddPayment() {
           <X size={24} />
         </ButtonCloseModal>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onTestAddPayment || onSubmit)}>
           <ContainerRow>
             <ContainerInput>
               <InputSyles
@@ -160,8 +183,21 @@ export function ModalAddPayment() {
           </ContainerRow>
 
           <ContainerButtons>
-            <ButtonSyles type="submit">SALVAR</ButtonSyles>
-            <ButtonCancel>CANCELAR</ButtonCancel>
+            <ButtonSyles 
+              type="submit"
+              onClick={() => {
+                if(onTestAddPayment){
+                  const data = getValues();
+
+                  onTestAddPayment(data)
+                }
+              }}
+              >
+                SALVAR</ButtonSyles>
+            <ButtonCancel onClick={() => {
+              close();
+              clearFields()
+            }}>CANCELAR</ButtonCancel>
           </ContainerButtons>
         </form>
       </Content>

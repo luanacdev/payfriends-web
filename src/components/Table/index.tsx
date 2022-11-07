@@ -11,18 +11,12 @@ import {
   GridToolbarExport,
   GridToolbarFilterButton,
   useGridApiContext,
-  // eslint-disable-next-line prettier/prettier
   useGridSelector
 } from '@mui/x-data-grid'
 import * as Dialog from '@radix-ui/react-dialog'
-import { AxiosResponse } from 'axios'
 import moment from 'moment'
 import { CheckCircle, Pencil, Trash, XCircle } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 
-import { toast } from 'react-toastify'
-import { ITasks } from '../../interfaces/ITasks'
-import { getTasks } from '../../services/tasks.service'
 import formatMonetaryValue from '../../utils/formatMonetaryValue'
 import { ModalEditPayment } from '../Modals/ModalEditPayment'
 import { ModalRemovePayment } from '../Modals/ModalRemovePayment'
@@ -121,20 +115,11 @@ function CustomPagination() {
   )
 }
 
-export function Table() {
-  // eslint-disable-next-line no-unused-vars
-  const [tasks, setTasks] = useState<ITasks[]>([])
+interface TableProps {
+  data: any[]
+}
 
-  useEffect(() => {
-    getTasks()
-      .then((res: AxiosResponse) => {
-        setTasks(res.data)
-      })
-      .catch(() => {
-        toast.error('Erro interno no servidor')
-      })
-  }, [setTasks])
-
+export function Table({data}: TableProps) {
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
@@ -157,7 +142,7 @@ export function Table() {
       }}
     >
       <DataGrid
-        rows={tasks}
+        rows={data}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

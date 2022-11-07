@@ -4,16 +4,16 @@ import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAccount } from '../../services/account.service'
 import {
-  SigninBox,
-  SigninButton,
-  SigninButtonContainer,
-  SigninContainer,
-  SigninImageBox,
-  SigninInput,
-  SigninInputContainer,
-  SigninLogoBox,
-  // eslint-disable-next-line prettier/prettier
-  SigninRightBox
+    SigninBox,
+    SigninButton,
+    SigninButtonContainer,
+    SigninContainer,
+    SigninImageBox,
+    SigninInput,
+    SigninInputContainer,
+    SigninLogoBox,
+    // eslint-disable-next-line prettier/prettier
+    SigninRightBox
 } from './styles'
 
 import { toast } from 'react-toastify'
@@ -32,7 +32,7 @@ interface SigninProps {
 }
 
 export function Signin({ onTestSignin }: SigninProps) {
-  const { setUser, signin } = useContext(AuthContext)
+  const { setUsers, signin } = useContext(AuthContext)
 
   const {
     handleSubmit,
@@ -51,12 +51,12 @@ export function Signin({ onTestSignin }: SigninProps) {
 
     getAccount()
       .then(async (res: AxiosResponse) => {
-        setUser(res.data)
+        setUsers(res.data)
       })
       .catch(() => {
         return toast.error('Erro interno no servidor.')
       })
-  }, [setUser])
+  }, [setUsers])
 
   return (
     <>

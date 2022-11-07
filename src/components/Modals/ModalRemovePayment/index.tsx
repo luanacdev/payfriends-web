@@ -15,11 +15,23 @@ import {
   ContainerButtons,
   ContainerInfoTask,
   Content,
-  // eslint-disable-next-line prettier/prettier
   Overlay
 } from './styles'
 
-export function ModalRemovePayment({ taskInfo }: any) {
+interface IModalRemovePaymentProps {
+  taskInfo: {
+    id: number
+    name: string
+    username: string
+    date: string
+    title: string
+    value: number
+    isPayed: boolean
+  }
+  onTestRemove?: (id: number) => void
+}
+
+export function ModalRemovePayment({ taskInfo, onTestRemove }: IModalRemovePaymentProps) {
   const handleDeleteTask = async () => {
     await deleteTask(taskInfo.id)
       .then(() => {
@@ -56,7 +68,7 @@ export function ModalRemovePayment({ taskInfo }: any) {
         </ContainerInfoTask>
 
         <ContainerButtons>
-          <ButtonSyles onClick={() => handleDeleteTask()}>
+          <ButtonSyles onClick={() => onTestRemove ? onTestRemove(taskInfo.id) : handleDeleteTask()}>
             CONFIRMAR
           </ButtonSyles>
           <ButtonCancel>CANCELAR</ButtonCancel>

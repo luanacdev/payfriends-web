@@ -3,14 +3,12 @@ import {
   HeaderButtonSigout,
   HeaderButtonUser,
   HeaderContainer,
-  // eslint-disable-next-line prettier/prettier
   HeaderContent
 } from './styles'
 
 import * as Dialog from '@radix-ui/react-dialog'
 import { SignOut, User } from 'phosphor-react'
 import { useContext } from 'react'
-import avatar from '../../assets/avatar.svg'
 import logo from '../../assets/logo-white.svg'
 import { AuthContext } from '../../contexts/AuthContext'
 import { ModalUser } from '../Modals/ModalUser'
@@ -21,10 +19,9 @@ export function Header() {
   return (
     <HeaderContainer>
       <HeaderContent>
-        <img src={logo} alt="" />
+        <img src={logo} alt="logo-PayFriends" />
 
         <HeaderBox>
-          <img src={avatar} alt="" />
 
           <Dialog.Root>
             <Dialog.Trigger asChild>
