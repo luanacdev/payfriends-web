@@ -1,7 +1,7 @@
 # **Desafio Frontend PicPay**
     - Luana Silva Campos 
     - Frontend Pleno React 
-    - Data de entrega: 07/09/2022
+    - Data de entrega: 07/11/2022
 
 ## Instruçõs para rodar o projeto 
 
