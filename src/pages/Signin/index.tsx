@@ -108,7 +108,7 @@ export function Signin({ onTestSignin }: SigninProps) {
           </SigninBox>
         </SigninRightBox>
         <SigninImageBox>
-          <img src={men} alt="Homen fazendo pagamento com PayFriends" />
+          <img src={men} alt="Homem fazendo pagamento com PayFriends" />
         </SigninImageBox>
       </SigninContainer>
     </>
