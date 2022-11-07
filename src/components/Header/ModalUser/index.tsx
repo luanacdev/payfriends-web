@@ -1,5 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Button } from '../../Form/Button';
+import { X } from 'phosphor-react';
+import { ButtonCloseModal } from '../../Form/Button/styles';
 
 import {
     ContainerRow,
@@ -17,7 +18,9 @@ export function ModalUser() {
             <Content>
                 <Dialog.Title>Dados do perfil</Dialog.Title>
 
-                <Button closeModal />
+                <ButtonCloseModal>
+                    <X size={24} />
+                </ButtonCloseModal>
 
                 <ContainerRow>
                     <p>Nome: {user.name}</p>

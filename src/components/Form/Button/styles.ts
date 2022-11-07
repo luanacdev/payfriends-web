@@ -5,7 +5,7 @@ interface IButtonProps {
   bgColor?: string
   fontColor?: string
   transitionColor?: string
-  whi?: string
+  wid?: string
   hei?: string
   mb?: string
   mt?: string
@@ -20,7 +20,7 @@ export const ButtonDefault = styled.button`
   margin-top: ${(props: IButtonProps) => (props.mt ? props.hei : '')};
   margin-bottom: ${(props: IButtonProps) => (props.mb ? props.hei : '')};
 
-  width: ${(props: IButtonProps) => (props.whi ? props.whi : '')};
+  width: ${(props: IButtonProps) => (props.wid ? props.wid : '')};
   height: ${(props: IButtonProps) => (props.hei ? props.hei : '')};
 
   color: ${(props: IButtonProps) =>
@@ -37,23 +37,7 @@ export const ButtonDefault = styled.button`
     transition: background-color 0.2s;
   }
 `
-export const ButtonCancel = styled(Dialog.Close)`
-  height: 30px;
-  padding: 0 1.25rem;
 
-  border: 0;
-  border-radius: 6px;
-
-  background: ${(props) => props.theme['gray-300']};
-
-  font-weight: bold;
-
-  cursor: pointer;
-  &:hover {
-    background: ${(props) => props.theme['gray-100']};
-    transition: background-color 0.2s;
-  }
-`
 export const ButtonCloseModal = styled(Dialog.Close)`
   border: 0;
   position: absolute;

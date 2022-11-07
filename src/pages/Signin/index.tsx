@@ -75,6 +75,9 @@ export function Signin({ onTestSignin }: SigninProps) {
                 error={errors.email && errors.email.message}
                 name="email"
                 placeholder="example@example.com"
+                width="100%"
+                widthContainer='100%'
+                padding='5px'
               />
 
               <Input
@@ -85,6 +88,9 @@ export function Signin({ onTestSignin }: SigninProps) {
                 error={errors.password && errors.password.message}
                 placeholder="*****"
                 name="password"
+                width="100%"
+                widthContainer='100%'
+                padding='5px'
               />
                         
               <SigninButtonContainer>

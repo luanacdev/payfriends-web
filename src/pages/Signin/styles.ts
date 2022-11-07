@@ -79,27 +79,3 @@ export const SigninButtonContainer = styled.div`
     margin-bottom: 5px;
   }
 `
-
-export const SigninInput = styled.input`
-  display: flex;
-  justify-content: center;
-
-  height: 40px;
-  width: 100%;
-  border-radius: 3px;
-  flex-direction: column;
-  border: 1px solid #d5d5d5;
-  background-color: ${(props) => props.theme['gray-200']};
-  padding: 5px;
-  overflow: auto;
-`
-
-export const SigninInputContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  p {
-    color: #616161;
-    margin-bottom: 5px;
-  }
-`

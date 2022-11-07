@@ -4,7 +4,6 @@ import { X } from 'phosphor-react'
 import { toast } from 'react-toastify'
 import { Button } from '../../../../components/Form/Button'
 import {
-  ButtonCancel,
   ButtonCloseModal
 } from '../../../../components/Form/Button/styles'
 import { deleteTask } from '../../../../services/tasks.service'
@@ -74,7 +73,16 @@ export function ModalRemovePayment({ taskInfo, onTestRemove, fetchTasks, close }
           <Button onClick={() => onTestRemove ? onTestRemove(taskInfo.id) : handleDeleteTask()}>
             CONFIRMAR
           </Button>
-          <ButtonCancel>CANCELAR</ButtonCancel>
+          <Button 
+              onClick={() => {
+                close();
+              }}
+              bgColor={'#C4C4CC'}
+              transitionColor={'#E5E5E5'}
+              fontColor={'black'}
+            >
+              CANCELAR
+            </Button>
         </ContainerButtons>
       </Content>
     </Dialog.Portal>

@@ -4,14 +4,7 @@ import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { Button } from '../../../../components/Form/Button'
-import {
-  ButtonCancel
-} from '../../../../components/Form/Button/styles'
-import {
-  ContainerInput,
-  ErrorMessage,
-  InputSyles
-} from '../../../../components/Form/Input/styles'
+import Input from '../../../../components/Form/Input'
 import { postTask } from '../../../../services/tasks.service'
 import { MESSAGE } from '../../../../utils/messages'
 import {
@@ -97,87 +90,66 @@ export function ModalAddPayment({ close, onTestAddPayment, onAddNewPayment}: Mod
 
         <form onSubmit={handleSubmit(onTestAddPayment || onSubmit)}>
           <ContainerRow>
-            <ContainerInput>
-              <InputSyles
-                type="string"
-                placeholder="Nome"
-                required
-                id="name"
-                {...register('name', {
-                  required: true,
-                })}
-              />
-              {errors.name && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
-
-            <ContainerInput>
-              <InputSyles
-                id="username"
-                type="string"
-                placeholder="Usuário*"
-                {...register('username', {
-                  required: true,
-                })}
-              />
-              {errors.username && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
+            <Input
+              type="string"
+              placeholder="Nome"
+              id="name"
+              name="name"
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.name && errors.name.message}
+            />
+             
+            <Input
+              type="string"
+              placeholder="Usuário*"
+              id="username"
+              name="username"
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.username && errors.username.message}
+            />
           </ContainerRow>
 
           <ContainerRow>
-            <ContainerInput>
-              <InputSyles
-                id="title"
-                type="string"
-                placeholder="Título*"
-                {...register('title', {
-                  required: true,
-                })}
-              />
-              {errors.title && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
+            <Input
+              type="string"
+              id="title"
+              name="title"
+              placeholder="Título*"
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.username && errors.username.message}
+            />
 
-            <ContainerInput>
-              <InputSyles
-                type="number"
-                placeholder="Valor*"
-                id="value"
-                {...register('value', {
-                  required: true,
-                })}
-              />
-              {errors.value && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
+            <Input
+              type="number"
+              placeholder="Valor*"
+              id="value"
+              name="value"
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.value && errors.value.message}
+            />
           </ContainerRow>
 
           <ContainerRow>
-            <ContainerInput>
-              <InputSyles
-                type="datetime-local"
-                placeholder="Data"
-                id="date"
-                {...register('date', {
-                  required: true,
-                })}
-              />
-              {errors.date && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
-
+            <Input
+              type="datetime-local"
+              placeholder="Data"
+              id="date"
+              name="date"
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.date && errors.date.message}
+            />
+             
             <Button
               type="button"
               onClick={() => setStatusPayed(!statusPayed)}
               bgColor={statusPayed ? '#00B37E' : '#F75A68'}
               transitionColor={statusPayed ? '#015F43' : '#7A1921'}
-              whi="45%"
+              wid="45%"
               hei="30px"
             >
               {statusPayed ? 'Pago' : 'Pendente'}
@@ -194,12 +166,21 @@ export function ModalAddPayment({ close, onTestAddPayment, onAddNewPayment}: Mod
                   onTestAddPayment(data)
                 }
               }}
-              >
-                SALVAR</Button>
-            <ButtonCancel onClick={() => {
-              close();
-              clearFields()
-            }}>CANCELAR</ButtonCancel>
+            >
+              SALVAR
+            </Button>
+            
+            <Button 
+              onClick={() => {
+                close();
+                clearFields()
+              }}
+              bgColor={'#C4C4CC'}
+              transitionColor={'#E5E5E5'}
+              fontColor={'black'}
+            >
+              CANCELAR
+            </Button>
           </ContainerButtons>
         </form>
       </Content>

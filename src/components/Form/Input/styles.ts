@@ -2,9 +2,23 @@ import styled from 'styled-components'
 
 interface IInputProps {
   width?: string
+  widthContainer?: string
+  padding?: string
 }
 
-export const InputSyles = styled.input`
+export const ContainerInput = styled.div`
+  width: ${(props: IInputProps) => (props.widthContainer ? props.widthContainer : '45%')};
+  padding: ${(props: IInputProps) => (props.padding ? props.padding : '')};
+  display: flex;
+  flex-direction: column;
+
+  p {
+    color: #616161;
+    margin-bottom: 5px;
+  }
+`
+
+export const InputDefault = styled.input`
   width: ${(props: IInputProps) => (props.width ? props.width : '')};
   padding: 1rem;
 
@@ -16,13 +30,6 @@ export const InputSyles = styled.input`
   &::placeholder {
     color: ${(props) => props.theme['gray-400']};
   }
-`
-
-export const ContainerInput = styled.div`
-  width: ${(props: IInputProps) => (props.width ? props.width : '45%')};
-
-  display: flex;
-  flex-direction: column;
 `
 
 export const ErrorMessage = styled.span`

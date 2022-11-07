@@ -6,15 +6,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { Button } from '../../../../components/Form/Button'
-import { ButtonCancel, ButtonCloseModal } from '../../../../components/Form/Button/styles'
+import { ButtonCloseModal } from '../../../../components/Form/Button/styles'
 import { updateTask } from '../../../../services/tasks.service'
 import { MESSAGE } from '../../../../utils/messages'
 
-import {
-  ContainerInput,
-  ErrorMessage,
-  InputSyles
-} from '../../../../components/Form/Input/styles'
+import Input from '../../../../components/Form/Input'
 import {
   ContainerButtons, ContainerRow,
   Content,
@@ -93,90 +89,71 @@ export function ModalEditPayment({ taskInfo, fetchTasks, close }: IModalEditPaym
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <ContainerRow>
-            <ContainerInput>
-              <InputSyles
-                type="string"
-                placeholder="Nome"
-                id="name"
-                {...register('name', {
-                  required: true,
-                })}
-                defaultValue={taskInfo.name}
-              />
-              {errors.name && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
+            <Input
+              type="string"
+              placeholder="Nome"
+              id="name"
+              name="name"
+              defaultValue={taskInfo.name}
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.name && errors.name.message}
+            />
 
-            <ContainerInput>
-              <InputSyles
-                id="username"
-                type="string"
-                placeholder="Usuário*"
-                {...register('username', {
-                  required: true,
-                })}
-                defaultValue={taskInfo.username}
-              />
-              {errors.username && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
+            <Input
+              id="username"
+              type="string"
+              placeholder="Usuário*"
+              name="username"
+              defaultValue={taskInfo.username}
+              register={register}
+              requiredMessage={MESSAGE.EMPTY_FIELD}
+              error={errors.username && errors.username.message}
+            />
           </ContainerRow>
 
           <ContainerRow>
-            <ContainerInput>
-              <InputSyles
+              <Input
                 id="title"
                 type="string"
                 placeholder="Título*"
-                {...register('title', {
-                  required: true,
-                })}
                 defaultValue={taskInfo.title}
+                register={register}
+                requiredMessage={MESSAGE.EMPTY_FIELD}
+                error={errors.username && errors.username.message}
+                name="title"
               />
-              {errors.title && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
 
-            <ContainerInput>
-              <InputSyles
+              <Input
+                type="number"
                 placeholder="Valor*"
                 id="value"
-                {...register('value', {
-                  required: true,
-                })}
+                name="value"
+                register={register}
+                requiredMessage={MESSAGE.EMPTY_FIELD}
+                error={errors.value && errors.value.message}
                 defaultValue={taskInfo.value}
               />
-              {errors.value && (
-                <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-              )}
-            </ContainerInput>
           </ContainerRow>
 
           <ContainerRow>
             {editDate ? (
-              <ContainerInput>
-                <InputSyles
-                  type="datetime-local"
-                  placeholder="Data"
-                  id="date"
-                  {...register('date', {
-                    required: true,
-                  })}
-                />
-                {errors.date && (
-                  <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-                )}
-              </ContainerInput>
+              <Input
+                type="datetime-local"
+                placeholder="Data"
+                id="date"
+                name="date"
+                register={register}
+                requiredMessage={MESSAGE.EMPTY_FIELD}
+                error={errors.date && errors.date.message}
+              />
             ) : (
               <>
-                <InputSyles
-                  {...register('date')}
+                <Input
+                  name="date"
+                  register={register}
                   defaultValue={moment(taskInfo.date).format('LLL')}
                   disabled
-                  width="45%"
                 />
                 <button onClick={() => setEditDate(!editDate)}>
                   <Calendar size={25} />
@@ -189,7 +166,7 @@ export function ModalEditPayment({ taskInfo, fetchTasks, close }: IModalEditPaym
                 onClick={() => setStatusPayed(!statusPayed)}
                 bgColor={statusPayed ? '#00B37E' : '#F75A68'}
                 transitionColor={statusPayed ? '#015F43' : '#7A1921'}
-                whi="45%"
+                wid="45%"
                 hei='30px'
               >
                 {statusPayed ? 'Pago' : 'Pendente'}
@@ -198,7 +175,16 @@ export function ModalEditPayment({ taskInfo, fetchTasks, close }: IModalEditPaym
 
           <ContainerButtons>
             <Button type="submit">SALVAR</Button>
-            <ButtonCancel>CANCELAR</ButtonCancel>
+            <Button 
+              onClick={() => {
+                close();
+              }}
+              bgColor={'#C4C4CC'}
+              transitionColor={'#E5E5E5'}
+              fontColor={'black'}
+            >
+              CANCELAR
+            </Button>
           </ContainerButtons>
         </form>
       </Content>
