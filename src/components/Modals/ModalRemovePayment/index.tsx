@@ -4,11 +4,10 @@ import { X } from 'phosphor-react'
 import { toast } from 'react-toastify'
 import { deleteTask } from '../../../services/tasks.service'
 import formatMonetaryValue from '../../../utils/formatMonetaryValue'
+import { Button } from '../../Form/Button'
 import {
   ButtonCancel,
-  ButtonCloseModal,
-  // eslint-disable-next-line prettier/prettier
-  ButtonSyles
+  ButtonCloseModal
 } from '../../Form/Button/styles'
 
 import {
@@ -68,9 +67,9 @@ export function ModalRemovePayment({ taskInfo, onTestRemove }: IModalRemovePayme
         </ContainerInfoTask>
 
         <ContainerButtons>
-          <ButtonSyles onClick={() => onTestRemove ? onTestRemove(taskInfo.id) : handleDeleteTask()}>
+          <Button onClick={() => onTestRemove ? onTestRemove(taskInfo.id) : handleDeleteTask()}>
             CONFIRMAR
-          </ButtonSyles>
+          </Button>
           <ButtonCancel>CANCELAR</ButtonCancel>
         </ContainerButtons>
       </Content>

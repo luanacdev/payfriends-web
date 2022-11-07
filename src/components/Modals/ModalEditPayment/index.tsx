@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { updateTask } from '../../../services/tasks.service'
 import { MESSAGE } from '../../../utils/messages'
-import { ButtonCancel, ButtonCloseModal, ButtonSyles } from '../../Form/Button/styles'
+import { Button } from '../../Form/Button'
+import { ButtonCancel, ButtonCloseModal } from '../../Form/Button/styles'
 
 import {
   ContainerInput,
@@ -161,7 +162,7 @@ export function ModalEditPayment({ taskInfo }: any) {
               </>
             )}
 
-              <ButtonSyles
+              <Button
                 type="button"
                 onClick={() => setStatusPayed(!statusPayed)}
                 bgColor={statusPayed ? '#00B37E' : '#F75A68'}
@@ -170,11 +171,11 @@ export function ModalEditPayment({ taskInfo }: any) {
                 hei='30px'
               >
                 {statusPayed ? 'Pago' : 'Pendente'}
-              </ButtonSyles>
+              </Button>
           </ContainerRow>
 
           <ContainerButtons>
-            <ButtonSyles type="submit">SALVAR</ButtonSyles>
+            <Button type="submit">SALVAR</Button>
             <ButtonCancel>CANCELAR</ButtonCancel>
           </ContainerButtons>
         </form>

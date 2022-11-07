@@ -9,7 +9,7 @@ interface IButtonProps {
   hei?: string
 }
 
-export const ButtonSyles = styled.button`
+export const ButtonDefault = styled.button`
   height: 30px;
   border: 0;
   border-radius: 6px;

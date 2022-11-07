@@ -5,10 +5,10 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { postTask } from '../../../services/tasks.service'
 import { MESSAGE } from '../../../utils/messages'
+import { Button } from '../../Form/Button'
 import {
   ButtonCancel,
-  ButtonCloseModal,
-  ButtonSyles
+  ButtonCloseModal
 } from '../../Form/Button/styles'
 import {
   ContainerInput,
@@ -170,7 +170,7 @@ export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: Moda
               )}
             </ContainerInput>
 
-            <ButtonSyles
+            <Button
               type="button"
               onClick={() => setStatusPayed(!statusPayed)}
               bgColor={statusPayed ? '#00B37E' : '#F75A68'}
@@ -179,11 +179,11 @@ export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: Moda
               hei="30px"
             >
               {statusPayed ? 'Pago' : 'Pendente'}
-            </ButtonSyles>
+            </Button>
           </ContainerRow>
 
           <ContainerButtons>
-            <ButtonSyles 
+            <Button
               type="submit"
               onClick={() => {
                 if(onTestAddPayment){
@@ -193,7 +193,7 @@ export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: Moda
                 }
               }}
               >
-                SALVAR</ButtonSyles>
+                SALVAR</Button>
             <ButtonCancel onClick={() => {
               close();
               clearFields()
