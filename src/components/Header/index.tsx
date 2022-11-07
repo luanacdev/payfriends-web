@@ -11,7 +11,7 @@ import { SignOut, User } from 'phosphor-react'
 import { useContext } from 'react'
 import logo from '../../assets/logo-white.svg'
 import { AuthContext } from '../../contexts/AuthContext'
-import { ModalUser } from '../Modals/ModalUser'
+import { ModalUser } from './ModalUser'
 
 export function Header() {
   const { sigout } = useContext(AuthContext)
@@ -22,11 +22,10 @@ export function Header() {
         <img src={logo} alt="logo-PayFriends" />
 
         <HeaderBox>
-
           <Dialog.Root>
             <Dialog.Trigger asChild>
               <HeaderButtonUser>
-                <User size={32} color="white" />
+                <User size={40} color="white" />
               </HeaderButtonUser>
             </Dialog.Trigger>
 

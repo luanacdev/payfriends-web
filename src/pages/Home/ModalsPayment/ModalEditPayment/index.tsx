@@ -5,31 +5,54 @@ import { Calendar, X } from 'phosphor-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { updateTask } from '../../../services/tasks.service'
-import { MESSAGE } from '../../../utils/messages'
-import { Button } from '../../Form/Button'
-import { ButtonCancel, ButtonCloseModal } from '../../Form/Button/styles'
+import { Button } from '../../../../components/Form/Button'
+import { ButtonCancel, ButtonCloseModal } from '../../../../components/Form/Button/styles'
+import { updateTask } from '../../../../services/tasks.service'
+import { MESSAGE } from '../../../../utils/messages'
 
 import {
   ContainerInput,
   ErrorMessage,
   InputSyles
-} from '../../Form/Input/styles'
+} from '../../../../components/Form/Input/styles'
 import {
   ContainerButtons, ContainerRow,
   Content,
   Overlay
 } from './styles'
 
-export function ModalEditPayment({ taskInfo }: any) {
+interface FormData {
+  name: string
+  username: string
+  title: string
+  value: number
+  date: string
+}
+
+interface IModalEditPaymentProps {
+  taskInfo: {
+    id: number
+    name: string
+    username: string
+    date: string
+    title: string
+    value: number
+    isPayed: boolean
+  }
+  fetchTasks: () => void
+}
+
+export function ModalEditPayment({ taskInfo, fetchTasks }: IModalEditPaymentProps) {
+  
+
   const [editDate, setEditDate] = useState(false)
   const [statusPayed, setStatusPayed] = useState(taskInfo.isPayed); 
 
   const {
     handleSubmit,
     register,
-    formState: { errors },
-  } = useForm()
+    formState: { errors }
+  } = useForm<FormData>()
 
   const onSubmit = async ({
     name,
@@ -37,8 +60,7 @@ export function ModalEditPayment({ taskInfo }: any) {
     title,
     value,
     date,
-    data
-  }: any) => {
+  }: FormData) => {
     await updateTask({
       id: taskInfo.id,
       name,
@@ -49,9 +71,8 @@ export function ModalEditPayment({ taskInfo }: any) {
       isPayed: statusPayed,
     })
       .then(() => {
+        fetchTasks()
         toast.success('Pagamento editado!')
-        window.location.href = '/home'
-
       })
       .catch(() => {
         toast.error('Não foi possível editar pagamento!')

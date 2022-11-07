@@ -36,7 +36,6 @@ export const ContainerInput = styled.div`
     border-radius: 6px;
     border: 0;
     background: ${(props) => props.theme['gray-100']};
-    /* color: ${(props) => props.theme['gray-300']}; */
     padding: 1rem;
     width: 45%;
     &::placeholder {
@@ -96,4 +95,14 @@ export const ContainerRow = styled.div`
     border: 0;
     cursor: pointer;
   }
+`
+
+export const ButtonCloseModal = styled(Dialog.Close)`
+  border: 0;
+  position: absolute;
+  background: transparent;
+  top: 1.5rem;
+  right: 1.5rem;
+  line-height: 0;
+  cursor: pointer;
 `

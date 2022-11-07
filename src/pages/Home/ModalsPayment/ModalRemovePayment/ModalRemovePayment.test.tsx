@@ -1,8 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { render } from "@testing-library/react";
 import { ModalRemovePayment } from '.';
-import db from '../../../../db.json';
-import { HeaderButton } from "../../../pages/Home/styles";
+import db from '../../../../../db.json';
+import { HeaderButton } from "../../styles";
 
 describe('ModalDeletePayment', () => {
     it('should be delete payment', () => {

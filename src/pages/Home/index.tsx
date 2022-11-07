@@ -3,11 +3,12 @@ import { AxiosResponse } from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Header } from '../../components/Header'
-import { ModalAddPayment } from '../../components/Modals/ModalAddPayment'
-import { Table } from '../../components/Table'
 import { ITasks } from '../../interfaces/ITasks'
 import { getTasks } from '../../services/tasks.service'
+
+import { ModalAddPayment } from './ModalsPayment/ModalAddPayment'
 import { HeaderButton, HeaderTitle, HomeHeader, HomeTable } from './styles'
+import { Table } from './TableMyPayment'
 
 export function Home() {
   const [tasks, setTasks] = useState<ITasks[]>([])
@@ -46,7 +47,7 @@ export function Home() {
       </HomeHeader>
 
       <HomeTable>
-        <Table data={tasks} />
+        <Table data={tasks} fetchTasks={fetchTasks} />
       </HomeTable>
     </>
   )

@@ -1,7 +1,5 @@
-/* eslint-disable prettier/prettier */
 import * as Dialog from '@radix-ui/react-dialog';
-import { X } from 'phosphor-react';
-import { ButtonCloseModal } from '../../Form/Button/styles';
+import { Button } from '../../Form/Button';
 
 import {
     ContainerRow,
@@ -19,9 +17,7 @@ export function ModalUser() {
             <Content>
                 <Dialog.Title>Dados do perfil</Dialog.Title>
 
-                <ButtonCloseModal>
-                <X size={24} />
-                </ButtonCloseModal>
+                <Button closeModal />
 
                 <ContainerRow>
                     <p>Nome: {user.name}</p>

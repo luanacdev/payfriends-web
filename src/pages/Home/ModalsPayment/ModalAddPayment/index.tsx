@@ -3,19 +3,19 @@ import { X } from 'phosphor-react'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { postTask } from '../../../services/tasks.service'
-import { MESSAGE } from '../../../utils/messages'
-import { Button } from '../../Form/Button'
+import { Button } from '../../../../components/Form/Button'
 import {
-  ButtonCancel,
-  ButtonCloseModal
-} from '../../Form/Button/styles'
+  ButtonCancel
+} from '../../../../components/Form/Button/styles'
 import {
   ContainerInput,
   ErrorMessage,
   InputSyles
-} from '../../Form/Input/styles'
+} from '../../../../components/Form/Input/styles'
+import { postTask } from '../../../../services/tasks.service'
+import { MESSAGE } from '../../../../utils/messages'
 import {
+  ButtonCloseModal,
   ContainerButtons,
   ContainerRow,
   Content,
@@ -23,9 +23,9 @@ import {
 } from './styles'
 
 interface ModalAddPaymentProps {
-  onAddNewPayment: () => void;
   close: () => void;
   onTestAddPayment?: (params: FieldValues) => void
+  onAddNewPayment:  () => void
 }
 
 interface FormData {
@@ -36,7 +36,10 @@ interface FormData {
   date: string
 }
 
-export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: ModalAddPaymentProps) {
+export function ModalAddPayment({ close, onTestAddPayment, onAddNewPayment}: ModalAddPaymentProps) {
+
+  const [statusPayed, setStatusPayed] = useState(false)
+
   const {
     handleSubmit,
     register,
@@ -44,7 +47,6 @@ export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: Moda
     resetField,
     getValues
   } = useForm<FormData>()
-  const [statusPayed, setStatusPayed] = useState(false)
 
   const clearFields = () => {
     resetField('name')
@@ -72,8 +74,8 @@ export function ModalAddPayment({onAddNewPayment, close, onTestAddPayment}: Moda
     })
       .then(() => {
         clearFields()
-        onAddNewPayment();        
-        close();
+        onAddNewPayment()       
+        close()
 
         toast.success('Pagamento criado!')
       })

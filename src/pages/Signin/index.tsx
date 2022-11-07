@@ -4,22 +4,19 @@ import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../contexts/AuthContext'
 import { getAccount } from '../../services/account.service'
 import {
-    SigninBox,
-    SigninButton,
-    SigninButtonContainer,
-    SigninContainer,
-    SigninImageBox,
-    SigninInput,
-    SigninInputContainer,
-    SigninLogoBox,
-    // eslint-disable-next-line prettier/prettier
-    SigninRightBox
+  SigninBox,
+  SigninButton,
+  SigninButtonContainer,
+  SigninContainer,
+  SigninImageBox, SigninLogoBox,
+  // eslint-disable-next-line prettier/prettier
+  SigninRightBox
 } from './styles'
 
 import { toast } from 'react-toastify'
 import logo from '../../assets/logo.svg'
 import men from '../../assets/men-on-cell-phone.svg'
-import { ErrorMessage } from '../../components/Form/Input/styles'
+import Input from '../../components/Form/Input/'
 import { MESSAGE } from '../../utils/messages'
 
 interface FieldValues {
@@ -42,6 +39,7 @@ export function Signin({ onTestSignin }: SigninProps) {
   } = useForm<FieldValues>()
 
   const handleLogin = async (data: FieldValues) => {
+    console.log('data, ', data)
     signin(data.email, data.password)
   }
 
@@ -69,34 +67,26 @@ export function Signin({ onTestSignin }: SigninProps) {
 
             <h1>Bem vindo de volta</h1>
             <form onSubmit={handleSubmit(onTestSignin || handleLogin)}>
-              <SigninInputContainer>
-                <p>Email</p>
-                <SigninInput
-                  type="email"
-                  {...register('email', {
-                    required: true,
-                  })}
-                  placeholder="example@example.com"
-                />
-                {errors.email && (
-                  <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-                )}
-              </SigninInputContainer>
+              <Input
+                label="Email"
+                type="email"
+                register={register}
+                requiredMessage={MESSAGE.EMPTY_FIELD}
+                error={errors.email && errors.email.message}
+                name="email"
+                placeholder="example@example.com"
+              />
 
-              <SigninInputContainer>
-                <p>Senha</p>
-                <SigninInput
-                  type="password"
-                  {...register('password', {
-                    required: true,
-                  })}
-                  placeholder="*****"
-                />
-                {errors.password && (
-                  <ErrorMessage>{MESSAGE.EMPTY_FIELD}</ErrorMessage>
-                )}
-              </SigninInputContainer>
-
+              <Input
+                label="Senha"
+                type="password"
+                register={register}
+                requiredMessage={MESSAGE.EMPTY_FIELD}
+                error={errors.password && errors.password.message}
+                placeholder="*****"
+                name="password"
+              />
+                        
               <SigninButtonContainer>
                 <SigninButton type="submit" onClick={() => {
                   if(onTestSignin){

@@ -2,13 +2,13 @@ import * as Dialog from '@radix-ui/react-dialog'
 import moment from 'moment'
 import { X } from 'phosphor-react'
 import { toast } from 'react-toastify'
-import { deleteTask } from '../../../services/tasks.service'
-import formatMonetaryValue from '../../../utils/formatMonetaryValue'
-import { Button } from '../../Form/Button'
+import { Button } from '../../../../components/Form/Button'
 import {
   ButtonCancel,
   ButtonCloseModal
-} from '../../Form/Button/styles'
+} from '../../../../components/Form/Button/styles'
+import { deleteTask } from '../../../../services/tasks.service'
+import formatMonetaryValue from '../../../../utils/formatMonetaryValue'
 
 import {
   ContainerButtons,
@@ -28,14 +28,17 @@ interface IModalRemovePaymentProps {
     isPayed: boolean
   }
   onTestRemove?: (id: number) => void
+  fetchTasks: () => void
 }
 
-export function ModalRemovePayment({ taskInfo, onTestRemove }: IModalRemovePaymentProps) {
+export function ModalRemovePayment({ taskInfo, onTestRemove, fetchTasks }: IModalRemovePaymentProps) {
+ 
+
   const handleDeleteTask = async () => {
     await deleteTask(taskInfo.id)
       .then(() => {
+        fetchTasks()
         toast.success('Pagamento removido!')
-        window.location.href = '/home'
       })
       .catch(() => {
         return toast.error('Não foi possível remover pagamento!')

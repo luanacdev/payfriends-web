@@ -1,8 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { fireEvent, render } from "@testing-library/react";
 import { ModalAddPayment } from ".";
-import db from '../../../../db.json';
-import { HeaderButton } from '../../../pages/Home/styles';
+import db from '../../../../../db.json';
+import { HeaderButton } from '../../styles';
 
 describe('ModalAddPayment', () => {
     it('should add payment', () => {
