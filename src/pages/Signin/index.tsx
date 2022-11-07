@@ -22,16 +22,26 @@ import men from '../../assets/men-on-cell-phone.svg'
 import { ErrorMessage } from '../../components/Form/Input/styles'
 import { MESSAGE } from '../../utils/messages'
 
-export function Signin() {
+interface FieldValues {
+  email: string;
+  password: string;
+}
+
+interface SigninProps {
+  onTestSignin?: (params: FieldValues) => void 
+}
+
+export function Signin({ onTestSignin }: SigninProps) {
   const { setUser, signin } = useContext(AuthContext)
 
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm()
+    getValues
+  } = useForm<FieldValues>()
 
-  const handleLogin = async (data: any) => {
+  const handleLogin = async (data: FieldValues) => {
     signin(data.email, data.password)
   }
 
@@ -58,7 +68,7 @@ export function Signin() {
             </SigninLogoBox>
 
             <h1>Bem vindo de volta</h1>
-            <form onSubmit={handleSubmit(handleLogin)}>
+            <form onSubmit={handleSubmit(onTestSignin || handleLogin)}>
               <SigninInputContainer>
                 <p>Email</p>
                 <SigninInput
@@ -88,7 +98,13 @@ export function Signin() {
               </SigninInputContainer>
 
               <SigninButtonContainer>
-                <SigninButton type="submit" onClick={handleLogin}>
+                <SigninButton type="submit" onClick={() => {
+                  if(onTestSignin){
+                    const data = getValues();
+
+                    onTestSignin(data)
+                  }
+                }}>
                   Entrar
                 </SigninButton>
               </SigninButtonContainer>
