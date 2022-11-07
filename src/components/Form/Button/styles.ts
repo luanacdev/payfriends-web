@@ -7,6 +7,8 @@ interface IButtonProps {
   transitionColor?: string
   whi?: string
   hei?: string
+  mb?: string
+  mt?: string
 }
 
 export const ButtonDefault = styled.button`
@@ -14,6 +16,9 @@ export const ButtonDefault = styled.button`
   border: 0;
   border-radius: 6px;
   padding: 0 1.25rem;
+
+  margin-top: ${(props: IButtonProps) => (props.mt ? props.hei : '')};
+  margin-bottom: ${(props: IButtonProps) => (props.mb ? props.hei : '')};
 
   width: ${(props: IButtonProps) => (props.whi ? props.whi : '')};
   height: ${(props: IButtonProps) => (props.hei ? props.hei : '')};
