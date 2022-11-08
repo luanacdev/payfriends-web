@@ -39,7 +39,6 @@ export function Signin({ onTestSignin }: SigninProps) {
   } = useForm<FieldValues>()
 
   const handleLogin = async (data: FieldValues) => {
-    console.log('data, ', data)
     signin(data.email, data.password)
   }
 
